@@ -35,18 +35,18 @@ class DraftAPITest(APITestCase):
                 "content":"Idris 08169725751 \
                 Alagbaa Compound Ogbomoso,Oyo State",
                 }
-        url=reverse('diary-list') + 'contact/'
+        url=reverse('diary-list') + '1/'
         response=self.client.put(url,data)
         self.assertEqual(response.status_code,200)
         
         # try to check if update successful
-        detail=Diary.objects.get(title="contact")
+        detail=Diary.objects.get(id=1)
         content=detail.content
         self.assertIn("Alagbaa",content)
 
     def test_delete_diary_data_successfull(self):
         # url of "contact diary data"
-        url = reverse('diary-list') + 'contact/'
+        url = reverse('diary-list') + '1/'
         response=self.client.delete(url)
         self.assertEqual(response.status_code, 204)
 
