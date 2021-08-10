@@ -1,4 +1,4 @@
-name: Diary Api
+name: DiaryApi
 on: push
 
 jobs:
