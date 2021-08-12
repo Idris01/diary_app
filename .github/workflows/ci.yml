@@ -22,9 +22,6 @@ jobs:
       - name: confirm installes dependencies
         run: |
           pipenv run pip3 freeze
-      - name: move into project dirctory
-        run: |
-          cd dairyapp
       - name: make migration
         run: |
           pipenv run python3 manage.py makemigrations diary
