@@ -14,20 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path,re_path, include
 from rest_framework import routers
 
-from diary.views import DiaryView,UserView
+from diary.views import DiaryListCreateView,UserView, DiaryGetDestroyUpdateView
+
 
 #create a router for the api
 router = routers.DefaultRouter()
 
 #register the views with the router
-router.register(r'diarys/(?P<key>\w*)',DiaryView, 'diary')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    #path('admin/', admin.site.urls),
+    #path('api/', include(router.urls)),
     path('api/account/', UserView.as_view(),name='account'),
+    path('api/diarys/<str:key>/',DiaryListCreateView.as_view(), name='diary-list'),
+    
+    re_path(r'^api/diarys/(?P<key>\w*)/(?P<id>\d+)$',DiaryGetDestroyUpdateView.as_view(), name='diary-detail'),
+
 
 ]

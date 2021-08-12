@@ -4,7 +4,11 @@ from .models import Diary, User
 class DiarySerializer(ModelSerializer):
     class Meta:
         model=Diary
-        fields=("title", "content", "created_on")
+        fields=("id", "title", "content", "created_on")
+class DiaryCreateSerializer(ModelSerializer):
+    class Meta:
+        model=Diary
+        fields=("diary_key", "title", "content")
 
 class UserSerializer(ModelSerializer):
     class Meta:

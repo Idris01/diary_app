@@ -5,58 +5,46 @@ import json
 from .models import Diary, User
 
 # Create your tests here.
-class DraftAPITest(APITestCase):
+class DiaryTest(APITestCase):
     @classmethod
-    def setUpTestData(cls):
-        cls.base_url="localhost:8000/api/"
-
+    def setupTestData(cls):
+       ... 
     def setUp(self):
-        title="contact"
-        content="Idris 08169725751"
-        contact=Diary(title=title, content=content)
-        contact.save()
-
-    def test_initial_diarydata_count_is_one(self):
-        self.assertEqual(Diary.objects.count(),1)
-
-    
-    def test_post_diary_status_code_201(self):
-        data={
-                "title":"Address",
-                "content":"Alagbaa Compound Ogbomoso",
+        self.name="Idris"
+        self.password="9evergiveup"
+        self.account_url=reverse('account')
+        self.data={
+                "username":self.name,
+                "password":self.password
                 }
-        url=reverse('diary-list')
+
+
+
+    def test_diary_account_created(self):
+        url=self.account_url
+        data=self.data
         response=self.client.post(url,data)
-        self.assertEqual(response.status_code,201)
-
-    def test_update_diary_data_successful(self):
-        data={
-                "title":"contact",
-                "content":"Idris 08169725751 \
-                Alagbaa Compound Ogbomoso,Oyo State",
-                }
-        url=reverse('diary-list') + '1/'
-        response=self.client.put(url,data)
         self.assertEqual(response.status_code,200)
+
+    def test_diary_data_created(self):
+        # create a new user
+        user=User.objects.create_user(username="Yemi",password="1234567")
+        user.save()
+        key=user.key
+
+        #send a post request to create diary content
+        #for the user with the key
+
+        url=(reverse('diary-list',kwargs={'key':key}))
+        data={
+                "title":"My Dream",
+                "content": "My Dream is to Be a pro \
+                        by 2021 ending inShaAllah"
+                        }
+
+        response=self.client.post(url,data)
+
+        self.assertEqual(response.status_code,200)
+
         
-        # try to check if update successful
-        detail=Diary.objects.get(id=1)
-        content=detail.content
-        self.assertIn("Alagbaa",content)
-
-    def test_delete_diary_data_successfull(self):
-        # url of "contact diary data"
-        url = reverse('diary-list') + '1/'
-        response=self.client.delete(url)
-        self.assertEqual(response.status_code, 204)
-
-
-        #doube check from the database
-        #the diary data count should be zero
-        # since we deleted the only data in it
-
-        count=Diary.objects.count()
-        self.assertEqual(count,0)
-
-
 
