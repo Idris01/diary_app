@@ -17,16 +17,17 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from diary.views import DiaryView
+from diary.views import DiaryView,UserView
 
 #create a router for the api
 router = routers.DefaultRouter()
 
 #register the views with the router
-router.register(r'diarys',DiaryView, 'diary')
+router.register(r'diarys/(?P<key>\w*)',DiaryView, 'diary')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/account/', UserView.as_view(),name='account'),
 
 ]

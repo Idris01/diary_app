@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework.test import APITestCase
 import json
-from .models import Diary
+from .models import Diary, User
 
 # Create your tests here.
 class DraftAPITest(APITestCase):
