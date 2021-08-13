@@ -1,1 +1,1 @@
-web: gurnicon diaryapi.wsgi --log-file -
+web: gunicorn diaryapi.wsgi --log-file -

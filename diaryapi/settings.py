@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY",'django-insecure-ykcbi8y=ij55!p)
 
 DEBUG = os.environ.get("DJANGO_DEBUG","")!='False'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cryptic-brook-44441.herokuapp.com','127.0.0.1' ]
 
 
 # Application definition
