@@ -91,22 +91,25 @@ class UserView(APIView):
 
         # check if the data is valid
         if serializer.is_valid():
-            
-            try:
-                # get the user's key
-                username=request.data.get('username')
-                password=request.data.get('password')
+            user=serializer.save()
+            data={"key":user.key}
+            return Response(data)
 
-                user=User.objects.get(username=username, password=password)
+        elif len(request.data) == 2:
+            # get the user's key
+            username=request.data.get('username')
+            password=request.data.get('password')
+
+            if username == None or password==None:
+                return Response({"msg": "Invalid input"},status=400)
+
+            user=User.objects.get(username=username, password=password)
                 
-                data={"key":user.key}
-                return Response(data)
+            data={"key":user.key}
+            return Response(data)
 
-            except User.DoesNotExist:
-
-                user=serializer.save()
-                data={"key":user.key}
-                return Response(data)
+        else:
+            return Response({"msg": "Invalid input"},status=400)
 
 
 

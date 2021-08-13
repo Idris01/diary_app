@@ -1,7 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework.test import APITestCase
-import json
 from .models import Diary, User
 
 # Create your tests here.
@@ -51,13 +50,17 @@ class DiaryTest(APITestCase):
         response=self.client.post(url,self.data)
         
         # get the key from the response
-        key1=json.loads(response.text)["key"]
+        key1=response.json()["key"]
 
+        # send the same response again to mimic a lost
+        # key that the user wants to retrieve
         response=self.client.post(url,self.data)
 
-        key2=json.loads(response.text)["key"]
+        key2=response.json()["key"]
         
         self.assertEqual(key1,key2)
+
+    
 
 
 

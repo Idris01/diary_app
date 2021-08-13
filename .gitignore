@@ -4,3 +4,5 @@ settings_local.py
 
 ci.yml
 *_local.py
+htmlcov/
+.coverage
