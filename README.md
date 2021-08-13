@@ -15,12 +15,14 @@ The BASE_URL is ``` https://cryptic-brook-44441.herokuapp.com/api/ ``` and follo
 >*Note*: Keep the diary_key safe because it will be used to access your Diary. it can be retrieved by resending the Post request with the same details.
 
 2. CREATE  and RETRIEVE  Diary Contents
-- ```END_POINT = 'diarys/<diary_key>/'```
+- ```END_POINT = 'diarys/<diary_key>/' ```
 - Send a GET request to the url:
 ``` https://cryptic-brook-44441.herokuapp.com/api/diarys/<diary_key>/ ```
 and a response containing the details of all diary contents is received. This is empty for a new user.
 
->``` [{ "id": "1",
+>```
+ [
+     { "id": "1",
 	"title": <title>,
 	"content": <content of diary>,
 	"created_on":<date created>
@@ -42,12 +44,12 @@ if the request is sent successfully, a success message is received ```{ "msg":"D
 
 - ``` END_POINT = 'api/diarys/<diary_key>/<id>/' ```
 - A get request to the END_POINT
-``` https://cryptic-brook-44441.herokuapp.com/api/diarys/<diary_id>/<id>/``
+``` https://cryptic-brook-44441.herokuapp.com/api/diarys/<diary_key>/<id>/ ```
 Retrieves the dairy content of the specific id
 
 - A PUT request with updated content to either of the diary details updates the diary details with the id
 
-``` { "title":<Updated title> , "content": <Updated content>} ```
+``` { "title" : <Updated title> , "content": <Updated content>}  ```
 
 - A DELETE request deletes the content of the diary with the given id.
 
