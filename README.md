@@ -1,34 +1,56 @@
-# Diary API
-This is a simple django Diary API that performs CRUD operations
+## Diary Api Usage
 
-## Installation Procedure (Using Git Bash)
-The installation procedure is as detailed below
+DiaryAPI is built to serve as an online Diary. 
 
-- Clone the repository from ```https://github.com/idris01/diaryapi.git``` 
+### Usage
+The BASE_URL is ``` https://cryptic-brook-44441.herokuapp.com/api/ ``` and following are the endpoint details:
 
-- Move into the cloned Directory  ```cd diary_api```
-> Note: The current version of python 3 is required to for this app
+1. CREATE user key
+- ```END_POINT= 'acount/' ```
+- Send POST request with the body having format
+```{ "username": <username>, "password": <password>} ``` to ```https://cryptic-brook-44441.herokuapp.com/api/account/```
 
-- inside the ``` diaryapi``` run the python command ``` pip install pipenv ``` and wait for the the installation to complete.
+- If the POST request is succesfull, the response contains a unique ```diary_key``` for the account.
+```{"key":<diary_key }```
+>*Note*: Keep the diary_key safe because it will be used to access your Diary. it can be retrieved by resending the Post request with the same details.
 
-pipenv is a python package that is used in creating a virtual environment for specific project, this is very helpful because of likely variation in peoject dependecies, such that a project will be isolated with its own dependecy.
+2. CREATE  and RETRIEVE  Diary Contents
+- ```END_POINT = 'diarys/<diary_key>/'```
+- Send a GET request to the url:
+``` https://cryptic-brook-44441.herokuapp.com/api/diarys/<diary_key>/ ```
+and a response containing the details of all diary contents is received. This is empty for a new user.
 
-- At the completion of ```pipenv``` installation run the command ```pipenv shell``` to activate the virtual environment, next run the commamd ```pipenv install``` to install all project dependecies
+>``` [{ "id": "1",
+	"title": <title>,
+	"content": <content of diary>,
+	"created_on":<date created>
+	}
+	{ "id": "2",
+	"title": <title>,
+	"content": <content of diary>,
+	"created_on":<date created>
+	}
+	...
+	} ```
 
-- Move into the project directory ```cd backend``` and run the following commands:
- * ```python3 manage.py makemigrations diary``` ,this command sets up the sqlite database by converting the python code into sql code.
 
- * ```python3 manage.py migrate```  this command creates the db.sqlite3 database.
+- Send a POST request with the body content of format ``` { "title":<title of the entry> , "content": <contents of entry>} ```
 
- * finally run ```python3 manage.py runserver``` to start the server.
+if the request is sent successfully, a success message is received ```{ "msg":"Diary created" }```
 
+3. UPDATE , DELETE and view details of Diary Content.
 
+- ``` END_POINT = 'api/diarys/<diary_key>/<id>/' ```
+- A get request to the END_POINT
+``` https://cryptic-brook-44441.herokuapp.com/api/diarys/<diary_id>/<id>/``
+Retrieves the dairy content of the specific id
 
-## How to use the Diary api
+- A PUT request with updated content to either of the diary details updates the diary details with the id
 
-Go to your browser and type ```http://localhost:8000/api/``` to browse the api and carryout all CRUD operations
+``` { "title":<Updated title> , "content": <Updated content>} ```
 
-In order to interract with 
-### 1. CREATE
-POST request to "http://localhost:8000/api/diarys/
+- A DELETE request deletes the content of the diary with the given id.
 
+:sparkles: The Diary API is also browsable so you can check it out on your browser
+
+:+1: Enjoy
