@@ -10,6 +10,8 @@ gunicorn = "*"
 dj-database-url = "*"
 psycopg2-binary = "*"
 django-heroku = "*"
+coverage = "*"
+
 
 [dev-packages]
 
