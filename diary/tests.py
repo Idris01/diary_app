@@ -45,6 +45,21 @@ class DiaryTest(APITestCase):
         response=self.client.post(url,data)
 
         self.assertEqual(response.status_code,200)
+    
+    def test_lost_key_retrieved(self):
+        url=self.account_url
+        response=self.client.post(url,self.data)
+        
+        # get the key from the response
+        key1=json.loads(response.text)["key"]
+
+        response=self.client.post(url,self.data)
+
+        key2=json.loads(response.text)["key"]
+        
+        self.assertEqual(key1,key2)
+
+
 
         
 
