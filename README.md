@@ -20,20 +20,23 @@ The BASE_URL is ``` https://cryptic-brook-44441.herokuapp.com/api/ ``` and follo
 ``` https://cryptic-brook-44441.herokuapp.com/api/diarys/<diary_key>/ ```
 and a response containing the details of all diary contents is received. This is empty for a new user.
 
->```
+```
  [
-     { "id": "1",
+     { 
+        "id": "1",
 	"title": <title>,
 	"content": <content of diary>,
 	"created_on":<date created>
-	}
+	}, 
+
 	{ "id": "2",
 	"title": <title>,
 	"content": <content of diary>,
 	"created_on":<date created>
 	}
 	...
-	} ```
+	] 
+```
 
 
 - Send a POST request with the body content of format ``` { "title":<title of the entry> , "content": <contents of entry>} ```
