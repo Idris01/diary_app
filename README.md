@@ -6,7 +6,7 @@ DiaryAPI is built to serve as an online Diary.
 The BASE_URL is ``` https://cryptic-brook-44441.herokuapp.com/api/ ``` and following are the endpoint details:
 
 1. CREATE user key
-- ```END_POINT= 'acount/' ```
+- ```END_POINT= 'account/' ```
 - Send POST request with the body having format
 ```{ "username": <username>, "password": <password>} ``` to ```https://cryptic-brook-44441.herokuapp.com/api/account/```
 
